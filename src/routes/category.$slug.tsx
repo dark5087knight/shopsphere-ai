@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { ChevronRight, SlidersHorizontal } from "lucide-react";
 import { getCategory, productsByCategory } from "@/lib/catalog";
+import type { Category } from "@/lib/types";
 import { ProductGrid } from "@/components/product/ProductCard";
 import { FilterPanel, applyFilters, defaultFilters, type FilterState } from "@/components/product/FilterPanel";
 import { Button } from "@/components/ui/button";
@@ -30,7 +31,7 @@ export const Route = createFileRoute("/category/$slug")({
 });
 
 function CategoryPage() {
-  const { category } = Route.useLoaderData();
+  const { category } = Route.useLoaderData() as { category: Category };
   const [filters, setFilters] = useState<FilterState>(defaultFilters);
   const [showFilters, setShowFilters] = useState(false);
 

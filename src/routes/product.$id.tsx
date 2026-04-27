@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { ChevronRight, Heart, ShoppingBag, Star, Truck, Shield, RotateCcw, Store, Plus, Minus } from "lucide-react";
 import { getProduct, products as allProducts } from "@/lib/catalog";
+import type { Product } from "@/lib/types";
 import { useCart, useWishlist, useRecent } from "@/lib/stores";
 import { formatPrice, discountPct } from "@/lib/format";
 import { Button } from "@/components/ui/button";
@@ -40,7 +41,7 @@ const colorMap: Record<string, string> = {
 };
 
 function ProductPage() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: Product };
   const wishlist = useWishlist();
   const cart = useCart();
   const recent = useRecent();
