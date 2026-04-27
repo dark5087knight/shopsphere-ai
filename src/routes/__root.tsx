@@ -1,6 +1,10 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { Toaster } from "@/components/ui/sonner";
+import { CartDrawer } from "@/components/layout/CartDrawer";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 
 function NotFoundComponent() {
   return (
@@ -29,19 +33,24 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "GLAM — Trendy Fashion, Beauty & More" },
+      { name: "description", content: "Shop the latest fashion, beauty, home & lifestyle. Trending styles, daily drops, and unbeatable prices." },
+      { name: "author", content: "GLAM" },
+      { property: "og:title", content: "GLAM — Trendy Fashion, Beauty & More" },
+      { property: "og:description", content: "Shop the latest fashion, beauty, home & lifestyle." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      { rel: "preconnect", href: "https://images.unsplash.com" },
+    ],
+    scripts: [
+      {
+        children: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark');}}catch(e){}`,
       },
     ],
   }),
@@ -65,5 +74,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
-  return <Outlet />;
+  return (
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <Navbar />
+      <main className="flex-1">
+        <Outlet />
+      </main>
+      <Footer />
+      <CartDrawer />
+      <Toaster position="top-center" />
+    </div>
+  );
 }
