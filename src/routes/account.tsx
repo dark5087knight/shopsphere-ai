@@ -6,14 +6,14 @@ export const Route = createFileRoute("/account")({
   component: AccountLayout,
 });
 
-const navItems = [
+const navItems: { to: string; label: string; icon: typeof User; exact?: boolean }[] = [
   { to: "/account", label: "Overview", icon: User, exact: true },
   { to: "/account/orders", label: "Orders", icon: Package },
   { to: "/account/addresses", label: "Addresses", icon: MapPin },
   { to: "/account/payment", label: "Payment methods", icon: CreditCard },
   { to: "/account/notifications", label: "Notifications", icon: Bell },
   { to: "/wishlist", label: "Wishlist", icon: Heart },
-] as const;
+];
 
 function AccountLayout() {
   const path = useRouterState({ select: (s) => s.location.pathname });
@@ -28,7 +28,7 @@ function AccountLayout() {
               return (
                 <Link
                   key={item.to}
-                  to={item.to}
+                  to={item.to as "/account"}
                   className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm ${active ? "bg-primary/10 text-primary font-semibold" : "hover:bg-muted"}`}
                 >
                   <item.icon className="h-4 w-4" />
